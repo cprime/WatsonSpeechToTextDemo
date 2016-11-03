@@ -1,0 +1,630 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5AF40021CE1B2C3DC2F10FA6 /* Pods_WatsonSpeechToTextDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E1B452D1FCC08EFA68FEC9C /* Pods_WatsonSpeechToTextDemo.framework */; };
+		E69EB0831DC93028009B2B02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0821DC93028009B2B02 /* AppDelegate.swift */; };
+		E69EB0851DC93028009B2B02 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0841DC93028009B2B02 /* ViewController.swift */; };
+		E69EB0881DC93028009B2B02 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E69EB0861DC93028009B2B02 /* Main.storyboard */; };
+		E69EB08A1DC93028009B2B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E69EB0891DC93028009B2B02 /* Assets.xcassets */; };
+		E69EB08D1DC93028009B2B02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E69EB08B1DC93028009B2B02 /* LaunchScreen.storyboard */; };
+		E69EB0991DC97852009B2B02 /* NSFileManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0981DC97852009B2B02 /* NSFileManagerExtension.swift */; };
+		E69F19971DCBD16E00F58F31 /* AudioConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F19951DCBD16E00F58F31 /* AudioConstants.swift */; };
+		E69F19981DCBD16E00F58F31 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F19961DCBD16E00F58F31 /* AudioManager.swift */; };
+		E69F199A1DCCC57700F58F31 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E69F19991DCCC57700F58F31 /* keys.plist */; };
+		E69F199C1DCCC88600F58F31 /* ServiceKeyLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F199B1DCCC88600F58F31 /* ServiceKeyLoader.swift */; };
+		E6D8765F1DCA345A00B5D729 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876371DCA345A00B5D729 /* RestRequest.swift */; };
+		E6D876601DCA345A00B5D729 /* RestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876381DCA345A00B5D729 /* RestSerialization.swift */; };
+		E6D876611DCA345A00B5D729 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876391DCA345A00B5D729 /* RestToken.swift */; };
+		E6D876621DCA345A00B5D729 /* RestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8763A1DCA345A00B5D729 /* RestUtilities.swift */; };
+		E6D876631DCA345A00B5D729 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D8763E1DCA345A00B5D729 /* libogg.a */; };
+		E6D876641DCA345A00B5D729 /* libopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6D8763F1DCA345A00B5D729 /* libopus.a */; };
+		E6D876651DCA345A00B5D729 /* KeywordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8764C1DCA345A00B5D729 /* KeywordResult.swift */; };
+		E6D876661DCA345A00B5D729 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8764D1DCA345A00B5D729 /* Model.swift */; };
+		E6D876671DCA345A00B5D729 /* RecognitionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8764E1DCA345A00B5D729 /* RecognitionSettings.swift */; };
+		E6D876681DCA345A00B5D729 /* RecognitionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8764F1DCA345A00B5D729 /* RecognitionState.swift */; };
+		E6D876691DCA345A00B5D729 /* RecognitionStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876501DCA345A00B5D729 /* RecognitionStop.swift */; };
+		E6D8766A1DCA345A00B5D729 /* SpeechRecognitionAlternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876511DCA345A00B5D729 /* SpeechRecognitionAlternative.swift */; };
+		E6D8766B1DCA345A00B5D729 /* SpeechRecognitionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876521DCA345A00B5D729 /* SpeechRecognitionEvent.swift */; };
+		E6D8766C1DCA345A00B5D729 /* SpeechRecognitionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876531DCA345A00B5D729 /* SpeechRecognitionResult.swift */; };
+		E6D8766D1DCA345A00B5D729 /* SpeechRecognitionResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876541DCA345A00B5D729 /* SpeechRecognitionResults.swift */; };
+		E6D8766E1DCA345A00B5D729 /* WordAlternativeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876551DCA345A00B5D729 /* WordAlternativeResult.swift */; };
+		E6D8766F1DCA345A00B5D729 /* WordAlternativeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876561DCA345A00B5D729 /* WordAlternativeResults.swift */; };
+		E6D876701DCA345A00B5D729 /* WordConfidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876571DCA345A00B5D729 /* WordConfidence.swift */; };
+		E6D876711DCA345A00B5D729 /* WordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876581DCA345A00B5D729 /* WordTimestamp.swift */; };
+		E6D876721DCA345A00B5D729 /* SpeechToText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876591DCA345A00B5D729 /* SpeechToText.swift */; };
+		E6D876731DCA345A00B5D729 /* SpeechToTextEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8765A1DCA345A00B5D729 /* SpeechToTextEncoder.swift */; };
+		E6D876741DCA345A00B5D729 /* SpeechToTextRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8765B1DCA345A00B5D729 /* SpeechToTextRecorder.swift */; };
+		E6D876751DCA345A00B5D729 /* SpeechToTextSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8765C1DCA345A00B5D729 /* SpeechToTextSession.swift */; };
+		E6D876761DCA345A00B5D729 /* SpeechToTextSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8765D1DCA345A00B5D729 /* SpeechToTextSocket.swift */; };
+		E6D876771DCA345A00B5D729 /* SpeechToTextState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8765E1DCA345A00B5D729 /* SpeechToTextState.swift */; };
+		E6D8767A1DCA3F3100B5D729 /* WatsonSTTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876791DCA3F3100B5D729 /* WatsonSTTManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0AD4D3DB610895D18739C794 /* Pods-WatsonSpeechToTextDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsonSpeechToTextDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatsonSpeechToTextDemo/Pods-WatsonSpeechToTextDemo.release.xcconfig"; sourceTree = "<group>"; };
+		1E1B452D1FCC08EFA68FEC9C /* Pods_WatsonSpeechToTextDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatsonSpeechToTextDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7933E6DBF734E4478D55D147 /* Pods-WatsonSpeechToTextDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsonSpeechToTextDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatsonSpeechToTextDemo/Pods-WatsonSpeechToTextDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		E69EB07F1DC93028009B2B02 /* WatsonSpeechToTextDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatsonSpeechToTextDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E69EB0821DC93028009B2B02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E69EB0841DC93028009B2B02 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E69EB0871DC93028009B2B02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E69EB0891DC93028009B2B02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E69EB08C1DC93028009B2B02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E69EB08E1DC93028009B2B02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E69EB0981DC97852009B2B02 /* NSFileManagerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSFileManagerExtension.swift; sourceTree = "<group>"; };
+		E69F19951DCBD16E00F58F31 /* AudioConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioConstants.swift; sourceTree = "<group>"; };
+		E69F19961DCBD16E00F58F31 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		E69F19991DCCC57700F58F31 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = keys.plist; path = ../keys.plist; sourceTree = "<group>"; };
+		E69F199B1DCCC88600F58F31 /* ServiceKeyLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceKeyLoader.swift; sourceTree = "<group>"; };
+		E6D876371DCA345A00B5D729 /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
+		E6D876381DCA345A00B5D729 /* RestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestSerialization.swift; sourceTree = "<group>"; };
+		E6D876391DCA345A00B5D729 /* RestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestToken.swift; sourceTree = "<group>"; };
+		E6D8763A1DCA345A00B5D729 /* RestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestUtilities.swift; sourceTree = "<group>"; };
+		E6D8763E1DCA345A00B5D729 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
+		E6D8763F1DCA345A00B5D729 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
+		E6D876411DCA345A00B5D729 /* config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config_types.h; sourceTree = "<group>"; };
+		E6D876421DCA345A00B5D729 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		E6D876431DCA345A00B5D729 /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ogg.h; sourceTree = "<group>"; };
+		E6D876441DCA345A00B5D729 /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = os_types.h; sourceTree = "<group>"; };
+		E6D876461DCA345A00B5D729 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		E6D876471DCA345A00B5D729 /* opus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus.h; sourceTree = "<group>"; };
+		E6D876481DCA345A00B5D729 /* opus_defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_defines.h; sourceTree = "<group>"; };
+		E6D876491DCA345A00B5D729 /* opus_multistream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_multistream.h; sourceTree = "<group>"; };
+		E6D8764A1DCA345A00B5D729 /* opus_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opus_types.h; sourceTree = "<group>"; };
+		E6D8764C1DCA345A00B5D729 /* KeywordResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeywordResult.swift; sourceTree = "<group>"; };
+		E6D8764D1DCA345A00B5D729 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		E6D8764E1DCA345A00B5D729 /* RecognitionSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionSettings.swift; sourceTree = "<group>"; };
+		E6D8764F1DCA345A00B5D729 /* RecognitionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionState.swift; sourceTree = "<group>"; };
+		E6D876501DCA345A00B5D729 /* RecognitionStop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognitionStop.swift; sourceTree = "<group>"; };
+		E6D876511DCA345A00B5D729 /* SpeechRecognitionAlternative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionAlternative.swift; sourceTree = "<group>"; };
+		E6D876521DCA345A00B5D729 /* SpeechRecognitionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionEvent.swift; sourceTree = "<group>"; };
+		E6D876531DCA345A00B5D729 /* SpeechRecognitionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionResult.swift; sourceTree = "<group>"; };
+		E6D876541DCA345A00B5D729 /* SpeechRecognitionResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionResults.swift; sourceTree = "<group>"; };
+		E6D876551DCA345A00B5D729 /* WordAlternativeResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordAlternativeResult.swift; sourceTree = "<group>"; };
+		E6D876561DCA345A00B5D729 /* WordAlternativeResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordAlternativeResults.swift; sourceTree = "<group>"; };
+		E6D876571DCA345A00B5D729 /* WordConfidence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordConfidence.swift; sourceTree = "<group>"; };
+		E6D876581DCA345A00B5D729 /* WordTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTimestamp.swift; sourceTree = "<group>"; };
+		E6D876591DCA345A00B5D729 /* SpeechToText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
+		E6D8765A1DCA345A00B5D729 /* SpeechToTextEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextEncoder.swift; sourceTree = "<group>"; };
+		E6D8765B1DCA345A00B5D729 /* SpeechToTextRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextRecorder.swift; sourceTree = "<group>"; };
+		E6D8765C1DCA345A00B5D729 /* SpeechToTextSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextSession.swift; sourceTree = "<group>"; };
+		E6D8765D1DCA345A00B5D729 /* SpeechToTextSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextSocket.swift; sourceTree = "<group>"; };
+		E6D8765E1DCA345A00B5D729 /* SpeechToTextState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextState.swift; sourceTree = "<group>"; };
+		E6D876781DCA355900B5D729 /* WatsonSpeechToTextDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WatsonSpeechToTextDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		E6D876791DCA3F3100B5D729 /* WatsonSTTManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSTTManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E69EB07C1DC93028009B2B02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AF40021CE1B2C3DC2F10FA6 /* Pods_WatsonSpeechToTextDemo.framework in Frameworks */,
+				E6D876631DCA345A00B5D729 /* libogg.a in Frameworks */,
+				E6D876641DCA345A00B5D729 /* libopus.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		10A950EF20A2724A9EDACAA4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1E1B452D1FCC08EFA68FEC9C /* Pods_WatsonSpeechToTextDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		528328076BA3A1D7DA4CBA98 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7933E6DBF734E4478D55D147 /* Pods-WatsonSpeechToTextDemo.debug.xcconfig */,
+				0AD4D3DB610895D18739C794 /* Pods-WatsonSpeechToTextDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E69EB0761DC93028009B2B02 = {
+			isa = PBXGroup;
+			children = (
+				E6D876331DCA345A00B5D729 /* Contrib */,
+				E69EB0811DC93028009B2B02 /* WatsonSpeechToTextDemo */,
+				E69EB0801DC93028009B2B02 /* Products */,
+				528328076BA3A1D7DA4CBA98 /* Pods */,
+				10A950EF20A2724A9EDACAA4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E69EB0801DC93028009B2B02 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E69EB07F1DC93028009B2B02 /* WatsonSpeechToTextDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E69EB0811DC93028009B2B02 /* WatsonSpeechToTextDemo */ = {
+			isa = PBXGroup;
+			children = (
+				E69EB0981DC97852009B2B02 /* NSFileManagerExtension.swift */,
+				E69F19951DCBD16E00F58F31 /* AudioConstants.swift */,
+				E69F19961DCBD16E00F58F31 /* AudioManager.swift */,
+				E69EB0821DC93028009B2B02 /* AppDelegate.swift */,
+				E69EB0841DC93028009B2B02 /* ViewController.swift */,
+				E6D876791DCA3F3100B5D729 /* WatsonSTTManager.swift */,
+				E69EB0861DC93028009B2B02 /* Main.storyboard */,
+				E69EB0891DC93028009B2B02 /* Assets.xcassets */,
+				E69EB08B1DC93028009B2B02 /* LaunchScreen.storyboard */,
+				E69EB08E1DC93028009B2B02 /* Info.plist */,
+				E69F19991DCCC57700F58F31 /* keys.plist */,
+				E6D876781DCA355900B5D729 /* WatsonSpeechToTextDemo-Bridging-Header.h */,
+				E69F199B1DCCC88600F58F31 /* ServiceKeyLoader.swift */,
+			);
+			path = WatsonSpeechToTextDemo;
+			sourceTree = "<group>";
+		};
+		E6D876331DCA345A00B5D729 /* Contrib */ = {
+			isa = PBXGroup;
+			children = (
+				E6D876341DCA345A00B5D729 /* Watson */,
+			);
+			path = Contrib;
+			sourceTree = "<group>";
+		};
+		E6D876341DCA345A00B5D729 /* Watson */ = {
+			isa = PBXGroup;
+			children = (
+				E6D876351DCA345A00B5D729 /* v0.8.1 */,
+			);
+			path = Watson;
+			sourceTree = "<group>";
+		};
+		E6D876351DCA345A00B5D729 /* v0.8.1 */ = {
+			isa = PBXGroup;
+			children = (
+				E6D876361DCA345A00B5D729 /* RestKit */,
+				E6D8763B1DCA345A00B5D729 /* SpeechToText */,
+			);
+			path = v0.8.1;
+			sourceTree = "<group>";
+		};
+		E6D876361DCA345A00B5D729 /* RestKit */ = {
+			isa = PBXGroup;
+			children = (
+				E6D876371DCA345A00B5D729 /* RestRequest.swift */,
+				E6D876381DCA345A00B5D729 /* RestSerialization.swift */,
+				E6D876391DCA345A00B5D729 /* RestToken.swift */,
+				E6D8763A1DCA345A00B5D729 /* RestUtilities.swift */,
+			);
+			path = RestKit;
+			sourceTree = "<group>";
+		};
+		E6D8763B1DCA345A00B5D729 /* SpeechToText */ = {
+			isa = PBXGroup;
+			children = (
+				E6D8763C1DCA345A00B5D729 /* Dependencies */,
+				E6D8764B1DCA345A00B5D729 /* Models */,
+				E6D876591DCA345A00B5D729 /* SpeechToText.swift */,
+				E6D8765A1DCA345A00B5D729 /* SpeechToTextEncoder.swift */,
+				E6D8765B1DCA345A00B5D729 /* SpeechToTextRecorder.swift */,
+				E6D8765C1DCA345A00B5D729 /* SpeechToTextSession.swift */,
+				E6D8765D1DCA345A00B5D729 /* SpeechToTextSocket.swift */,
+				E6D8765E1DCA345A00B5D729 /* SpeechToTextState.swift */,
+			);
+			path = SpeechToText;
+			sourceTree = "<group>";
+		};
+		E6D8763C1DCA345A00B5D729 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				E6D8763D1DCA345A00B5D729 /* lib */,
+				E6D876401DCA345A00B5D729 /* ogg */,
+				E6D876451DCA345A00B5D729 /* opus */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		E6D8763D1DCA345A00B5D729 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				E6D8763E1DCA345A00B5D729 /* libogg.a */,
+				E6D8763F1DCA345A00B5D729 /* libopus.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		E6D876401DCA345A00B5D729 /* ogg */ = {
+			isa = PBXGroup;
+			children = (
+				E6D876411DCA345A00B5D729 /* config_types.h */,
+				E6D876421DCA345A00B5D729 /* module.modulemap */,
+				E6D876431DCA345A00B5D729 /* ogg.h */,
+				E6D876441DCA345A00B5D729 /* os_types.h */,
+			);
+			path = ogg;
+			sourceTree = "<group>";
+		};
+		E6D876451DCA345A00B5D729 /* opus */ = {
+			isa = PBXGroup;
+			children = (
+				E6D876461DCA345A00B5D729 /* module.modulemap */,
+				E6D876471DCA345A00B5D729 /* opus.h */,
+				E6D876481DCA345A00B5D729 /* opus_defines.h */,
+				E6D876491DCA345A00B5D729 /* opus_multistream.h */,
+				E6D8764A1DCA345A00B5D729 /* opus_types.h */,
+			);
+			path = opus;
+			sourceTree = "<group>";
+		};
+		E6D8764B1DCA345A00B5D729 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E6D8764C1DCA345A00B5D729 /* KeywordResult.swift */,
+				E6D8764D1DCA345A00B5D729 /* Model.swift */,
+				E6D8764E1DCA345A00B5D729 /* RecognitionSettings.swift */,
+				E6D8764F1DCA345A00B5D729 /* RecognitionState.swift */,
+				E6D876501DCA345A00B5D729 /* RecognitionStop.swift */,
+				E6D876511DCA345A00B5D729 /* SpeechRecognitionAlternative.swift */,
+				E6D876521DCA345A00B5D729 /* SpeechRecognitionEvent.swift */,
+				E6D876531DCA345A00B5D729 /* SpeechRecognitionResult.swift */,
+				E6D876541DCA345A00B5D729 /* SpeechRecognitionResults.swift */,
+				E6D876551DCA345A00B5D729 /* WordAlternativeResult.swift */,
+				E6D876561DCA345A00B5D729 /* WordAlternativeResults.swift */,
+				E6D876571DCA345A00B5D729 /* WordConfidence.swift */,
+				E6D876581DCA345A00B5D729 /* WordTimestamp.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E69EB07E1DC93028009B2B02 /* WatsonSpeechToTextDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E69EB0911DC93028009B2B02 /* Build configuration list for PBXNativeTarget "WatsonSpeechToTextDemo" */;
+			buildPhases = (
+				0A98D560CAC347DD34A1A360 /* [CP] Check Pods Manifest.lock */,
+				E69EB07B1DC93028009B2B02 /* Sources */,
+				E69EB07C1DC93028009B2B02 /* Frameworks */,
+				E69EB07D1DC93028009B2B02 /* Resources */,
+				E651158947C78745E4523301 /* [CP] Embed Pods Frameworks */,
+				081F6311ADA187F8BC1C1982 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WatsonSpeechToTextDemo;
+			productName = WatsonSpeechToTextDemo;
+			productReference = E69EB07F1DC93028009B2B02 /* WatsonSpeechToTextDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E69EB0771DC93028009B2B02 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = IntrepidPursuits;
+				TargetAttributes = {
+					E69EB07E1DC93028009B2B02 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = THP5EV5EJ9;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = E69EB07A1DC93028009B2B02 /* Build configuration list for PBXProject "WatsonSpeechToTextDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E69EB0761DC93028009B2B02;
+			productRefGroup = E69EB0801DC93028009B2B02 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E69EB07E1DC93028009B2B02 /* WatsonSpeechToTextDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E69EB07D1DC93028009B2B02 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E69F199A1DCCC57700F58F31 /* keys.plist in Resources */,
+				E69EB08D1DC93028009B2B02 /* LaunchScreen.storyboard in Resources */,
+				E69EB08A1DC93028009B2B02 /* Assets.xcassets in Resources */,
+				E69EB0881DC93028009B2B02 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		081F6311ADA187F8BC1C1982 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WatsonSpeechToTextDemo/Pods-WatsonSpeechToTextDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0A98D560CAC347DD34A1A360 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E651158947C78745E4523301 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WatsonSpeechToTextDemo/Pods-WatsonSpeechToTextDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E69EB07B1DC93028009B2B02 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6D876741DCA345A00B5D729 /* SpeechToTextRecorder.swift in Sources */,
+				E69EB0851DC93028009B2B02 /* ViewController.swift in Sources */,
+				E6D876611DCA345A00B5D729 /* RestToken.swift in Sources */,
+				E6D8766B1DCA345A00B5D729 /* SpeechRecognitionEvent.swift in Sources */,
+				E6D876751DCA345A00B5D729 /* SpeechToTextSession.swift in Sources */,
+				E6D876721DCA345A00B5D729 /* SpeechToText.swift in Sources */,
+				E6D876671DCA345A00B5D729 /* RecognitionSettings.swift in Sources */,
+				E6D8766D1DCA345A00B5D729 /* SpeechRecognitionResults.swift in Sources */,
+				E6D8767A1DCA3F3100B5D729 /* WatsonSTTManager.swift in Sources */,
+				E69EB0831DC93028009B2B02 /* AppDelegate.swift in Sources */,
+				E6D876761DCA345A00B5D729 /* SpeechToTextSocket.swift in Sources */,
+				E6D876771DCA345A00B5D729 /* SpeechToTextState.swift in Sources */,
+				E69EB0991DC97852009B2B02 /* NSFileManagerExtension.swift in Sources */,
+				E69F199C1DCCC88600F58F31 /* ServiceKeyLoader.swift in Sources */,
+				E6D876651DCA345A00B5D729 /* KeywordResult.swift in Sources */,
+				E69F19981DCBD16E00F58F31 /* AudioManager.swift in Sources */,
+				E69F19971DCBD16E00F58F31 /* AudioConstants.swift in Sources */,
+				E6D876621DCA345A00B5D729 /* RestUtilities.swift in Sources */,
+				E6D876661DCA345A00B5D729 /* Model.swift in Sources */,
+				E6D8766F1DCA345A00B5D729 /* WordAlternativeResults.swift in Sources */,
+				E6D8766A1DCA345A00B5D729 /* SpeechRecognitionAlternative.swift in Sources */,
+				E6D8765F1DCA345A00B5D729 /* RestRequest.swift in Sources */,
+				E6D876701DCA345A00B5D729 /* WordConfidence.swift in Sources */,
+				E6D876711DCA345A00B5D729 /* WordTimestamp.swift in Sources */,
+				E6D876691DCA345A00B5D729 /* RecognitionStop.swift in Sources */,
+				E6D876681DCA345A00B5D729 /* RecognitionState.swift in Sources */,
+				E6D876731DCA345A00B5D729 /* SpeechToTextEncoder.swift in Sources */,
+				E6D8766C1DCA345A00B5D729 /* SpeechRecognitionResult.swift in Sources */,
+				E6D8766E1DCA345A00B5D729 /* WordAlternativeResult.swift in Sources */,
+				E6D876601DCA345A00B5D729 /* RestSerialization.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E69EB0861DC93028009B2B02 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E69EB0871DC93028009B2B02 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E69EB08B1DC93028009B2B02 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E69EB08C1DC93028009B2B02 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E69EB08F1DC93028009B2B02 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E69EB0901DC93028009B2B02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E69EB0921DC93028009B2B02 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7933E6DBF734E4478D55D147 /* Pods-WatsonSpeechToTextDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = THP5EV5EJ9;
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = WatsonSpeechToTextDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Contrib/Watson/v0.8.1/SpeechToText/Dependencies/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.intrepid.WatsonSpeechToTextDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WatsonSpeechToTextDemo/WatsonSpeechToTextDemo-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		E69EB0931DC93028009B2B02 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0AD4D3DB610895D18739C794 /* Pods-WatsonSpeechToTextDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = THP5EV5EJ9;
+				GCC_GENERATE_TEST_COVERAGE_FILES = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = WatsonSpeechToTextDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Contrib/Watson/v0.8.1/SpeechToText/Dependencies/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.intrepid.WatsonSpeechToTextDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WatsonSpeechToTextDemo/WatsonSpeechToTextDemo-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E69EB07A1DC93028009B2B02 /* Build configuration list for PBXProject "WatsonSpeechToTextDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E69EB08F1DC93028009B2B02 /* Debug */,
+				E69EB0901DC93028009B2B02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E69EB0911DC93028009B2B02 /* Build configuration list for PBXNativeTarget "WatsonSpeechToTextDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E69EB0921DC93028009B2B02 /* Debug */,
+				E69EB0931DC93028009B2B02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E69EB0771DC93028009B2B02 /* Project object */;
+}

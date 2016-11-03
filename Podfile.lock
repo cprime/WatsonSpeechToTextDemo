@@ -1,0 +1,26 @@
+PODS:
+  - Alamofire (3.5.1)
+  - Freddy (2.1.0)
+  - Intrepid (0.5.2):
+    - Intrepid/Core (= 0.5.2)
+  - Intrepid/Core (0.5.2):
+    - IP-UIKit-Wisdom (= 0.0.9)
+  - IP-UIKit-Wisdom (0.0.9)
+  - Starscream (1.1.4)
+
+DEPENDENCIES:
+  - Alamofire (~> 3.5.1)
+  - Freddy (~> 2.1.0)
+  - Intrepid (~> 0.5.2)
+  - Starscream (~> 1.1.4)
+
+SPEC CHECKSUMS:
+  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
+  Freddy: bbdca013977db29638b24baf6572ce94452bec29
+  Intrepid: a72e2da8e411ddb04d74e348b3ffbfb6e6197a37
+  IP-UIKit-Wisdom: cd9838571e97427a0c61c05d856eaaca9afd7c1a
+  Starscream: f919aeaf81afca6d5d4d3e5f6dd136ec92af2aa1
+
+PODFILE CHECKSUM: 313fe26eecb16fcbce998a5e1cad3d4efba99ce6
+
+COCOAPODS: 1.2.0.beta.1
