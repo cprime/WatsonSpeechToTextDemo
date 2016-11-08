@@ -13,8 +13,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var stopRecordingButton: UIButton!
     @IBOutlet weak var transcriptTextView: UITextView!
 
+    let speechToTextController: SpeechToTextController = WatsonSpeechToTextController.shared
+
     var isTranscribing: Bool {
-        return WatsonSTTManager.shared.state.isTranscribing
+        return WatsonSpeechToTextController.shared.state.isTranscribing
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -35,11 +37,16 @@ class ViewController: UIViewController {
     @IBAction func didTapStartRecording(sender: AnyObject) {
         print(#function)
 
+        let interimResultsCallback: SpeechTranscription -> Void = { transcription in
+            print("onResults:", transcription)
+            self.transcriptTextView.text = transcription.transcript
+        }
+        let interuptionCallback: ErrorType -> Void = { error in
+            print("interuption Starting: ", error)
+        }
+
         do {
-            try WatsonSTTManager.shared.startTranscribing({ results in
-                print("onResults:", results.bestTranscript)
-                self.transcriptTextView.text = results.bestTranscript
-            })
+            try speechToTextController.startTranscribingAudioStream(withKeywords: [], interimResultsCallback: interimResultsCallback, interuptionCallback: interuptionCallback)
         } catch let error {
             print("Error Starting: ", error)
         }
@@ -50,7 +57,14 @@ class ViewController: UIViewController {
         print(#function)
 
         do {
-            try WatsonSTTManager.shared.stopTranscribing()
+            try speechToTextController.stopTranscribingAudioStream { result in
+                if let result = result.value {
+                    self.transcriptTextView.text = result.transcription.transcript
+                    print(result.recordingURL)
+                } else {
+                    print("Failure: ", result.error)
+                }
+            }
         } catch let error {
             print("Error Stopping: ", error)
         }

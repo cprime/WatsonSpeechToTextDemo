@@ -18,6 +18,7 @@
 		E69F19981DCBD16E00F58F31 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F19961DCBD16E00F58F31 /* AudioManager.swift */; };
 		E69F199A1DCCC57700F58F31 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E69F19991DCCC57700F58F31 /* keys.plist */; };
 		E69F199C1DCCC88600F58F31 /* ServiceKeyLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F199B1DCCC88600F58F31 /* ServiceKeyLoader.swift */; };
+		E69F199E1DCCDC9300F58F31 /* SpeechToTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F199D1DCCDC9300F58F31 /* SpeechToTextController.swift */; };
 		E6D8765F1DCA345A00B5D729 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876371DCA345A00B5D729 /* RestRequest.swift */; };
 		E6D876601DCA345A00B5D729 /* RestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876381DCA345A00B5D729 /* RestSerialization.swift */; };
 		E6D876611DCA345A00B5D729 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876391DCA345A00B5D729 /* RestToken.swift */; };
@@ -43,7 +44,7 @@
 		E6D876751DCA345A00B5D729 /* SpeechToTextSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8765C1DCA345A00B5D729 /* SpeechToTextSession.swift */; };
 		E6D876761DCA345A00B5D729 /* SpeechToTextSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8765D1DCA345A00B5D729 /* SpeechToTextSocket.swift */; };
 		E6D876771DCA345A00B5D729 /* SpeechToTextState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8765E1DCA345A00B5D729 /* SpeechToTextState.swift */; };
-		E6D8767A1DCA3F3100B5D729 /* WatsonSTTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876791DCA3F3100B5D729 /* WatsonSTTManager.swift */; };
+		E6D8767A1DCA3F3100B5D729 /* WatsonSpeechToTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876791DCA3F3100B5D729 /* WatsonSpeechToTextController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		E69F19961DCBD16E00F58F31 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		E69F19991DCCC57700F58F31 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = keys.plist; path = ../keys.plist; sourceTree = "<group>"; };
 		E69F199B1DCCC88600F58F31 /* ServiceKeyLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceKeyLoader.swift; sourceTree = "<group>"; };
+		E69F199D1DCCDC9300F58F31 /* SpeechToTextController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextController.swift; sourceTree = "<group>"; };
 		E6D876371DCA345A00B5D729 /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
 		E6D876381DCA345A00B5D729 /* RestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestSerialization.swift; sourceTree = "<group>"; };
 		E6D876391DCA345A00B5D729 /* RestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestToken.swift; sourceTree = "<group>"; };
@@ -97,7 +99,7 @@
 		E6D8765D1DCA345A00B5D729 /* SpeechToTextSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextSocket.swift; sourceTree = "<group>"; };
 		E6D8765E1DCA345A00B5D729 /* SpeechToTextState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextState.swift; sourceTree = "<group>"; };
 		E6D876781DCA355900B5D729 /* WatsonSpeechToTextDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WatsonSpeechToTextDemo-Bridging-Header.h"; sourceTree = "<group>"; };
-		E6D876791DCA3F3100B5D729 /* WatsonSTTManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSTTManager.swift; sourceTree = "<group>"; };
+		E6D876791DCA3F3100B5D729 /* WatsonSpeechToTextController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonSpeechToTextController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +160,8 @@
 				E69F19961DCBD16E00F58F31 /* AudioManager.swift */,
 				E69EB0821DC93028009B2B02 /* AppDelegate.swift */,
 				E69EB0841DC93028009B2B02 /* ViewController.swift */,
-				E6D876791DCA3F3100B5D729 /* WatsonSTTManager.swift */,
+				E6D876791DCA3F3100B5D729 /* WatsonSpeechToTextController.swift */,
+				E69F199D1DCCDC9300F58F31 /* SpeechToTextController.swift */,
 				E69EB0861DC93028009B2B02 /* Main.storyboard */,
 				E69EB0891DC93028009B2B02 /* Assets.xcassets */,
 				E69EB08B1DC93028009B2B02 /* LaunchScreen.storyboard */,
@@ -419,9 +422,10 @@
 				E6D8766B1DCA345A00B5D729 /* SpeechRecognitionEvent.swift in Sources */,
 				E6D876751DCA345A00B5D729 /* SpeechToTextSession.swift in Sources */,
 				E6D876721DCA345A00B5D729 /* SpeechToText.swift in Sources */,
+				E69F199E1DCCDC9300F58F31 /* SpeechToTextController.swift in Sources */,
 				E6D876671DCA345A00B5D729 /* RecognitionSettings.swift in Sources */,
 				E6D8766D1DCA345A00B5D729 /* SpeechRecognitionResults.swift in Sources */,
-				E6D8767A1DCA3F3100B5D729 /* WatsonSTTManager.swift in Sources */,
+				E6D8767A1DCA3F3100B5D729 /* WatsonSpeechToTextController.swift in Sources */,
 				E69EB0831DC93028009B2B02 /* AppDelegate.swift in Sources */,
 				E6D876761DCA345A00B5D729 /* SpeechToTextSocket.swift in Sources */,
 				E6D876771DCA345A00B5D729 /* SpeechToTextState.swift in Sources */,
@@ -486,6 +490,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -535,6 +540,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

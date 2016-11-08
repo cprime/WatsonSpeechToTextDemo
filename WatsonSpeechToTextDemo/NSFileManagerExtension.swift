@@ -15,4 +15,10 @@ extension NSFileManager {
                                                        .UserDomainMask, true)[0]
         }
     }
+
+    static var temporaryPath: String {
+        get {
+            return NSTemporaryDirectory()
+        }
+    }
 }
