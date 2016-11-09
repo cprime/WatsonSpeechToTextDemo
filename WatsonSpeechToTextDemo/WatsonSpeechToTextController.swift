@@ -8,11 +8,12 @@
 //  Responsibilies:
 //      - Turn on/off microphone
 //      - Record audio to file
-//      - Mananage audio session
-//      - Play tones
 //      - Start/stop transcription service
-//      - Convert transcription results into SpeechToTextResult struct
-//      - Handle interuptions
+//      - TODO: Mananage audio session
+//      - TODO: Play tones
+//      - TODO: Convert transcription results into SpeechToTextResult struct
+//      - TODO: Handle session interruptions
+//      - Handle errors
 
 import Foundation
 import AVFoundation
@@ -20,7 +21,7 @@ import Intrepid
 
 class WatsonSpeechToTextController: SpeechToTextController {
     typealias InterimResultsCallback = SpeechTranscription -> Void
-    typealias InteruptionCallback = ErrorType -> Void
+    typealias InterruptionCallback = ErrorType -> Void
     typealias CompletionCallback = Result<SpeechToTextResult> -> Void
 
     static let shared = WatsonSpeechToTextController()
@@ -36,7 +37,8 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
     enum State {
         case Idle
-        case Transcribing(session: SpeechToTextSession, audioFile: AVAudioFile, interimResultsCallback: InterimResultsCallback?, interuptionCallback: InteruptionCallback?)
+        case Transcribing(session: SpeechToTextSession, audioFile: AVAudioFile, interimResultsCallback: InterimResultsCallback?, interruptionCallback: InterruptionCallback?, hasConnected: Bool)
+        case FailingTranscription(session: SpeechToTextSession, error: ErrorType, interruptionCallback: InterruptionCallback?)
         case FinishingTranscription(session: SpeechToTextSession, audioFile: AVAudioFile, completion: CompletionCallback)
 
         var isIdle: Bool {
@@ -59,7 +61,7 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
         var session: SpeechToTextSession? {
             switch self {
-            case .Transcribing(let session, _, _, _):
+            case .Transcribing(let session, _, _, _, _):
                 return session
             default:
                 return nil
@@ -68,14 +70,18 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
         var audioFile: AVAudioFile? {
             switch self {
-            case .Transcribing(_, let audioFile, _, _):
+            case .Transcribing(_, let audioFile, _, _, _):
                 return audioFile
             default:
                 return nil
             }
         }
     }
-    var state = State.Idle
+    var state = State.Idle {
+        didSet(oldValue) {
+            print(oldValue, " -> ", state)
+        }
+    }
 
     private static let audioSettings: [String : AnyObject] = [
         AVSampleRateKey: 16000,
@@ -95,15 +101,7 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
     private func createSpeechToTextSession(audioFile: AVAudioFile) -> SpeechToTextSession {
         let speechToTextSession = SpeechToTextSession(username: WatsonSpeechToTextController.username, password: WatsonSpeechToTextController.password)
-
-        // define callbacks
-        speechToTextSession.onConnect = handleOnConnectEvent
-        speechToTextSession.onDisconnect = handleOnDisconnectEvent
-        speechToTextSession.onPowerData = handleOnPowerDataEvent
-        speechToTextSession.onError = handleOnErrorEvent
-        speechToTextSession.onMicrophoneData = handleOnMicrophoneDataEvent
-        speechToTextSession.onResults = handleOnResultsEvent
-
+        setCallbacks(withSession: speechToTextSession)
         return speechToTextSession
     }
 
@@ -119,7 +117,7 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
     func startTranscribingAudioStream(withKeywords keywords: [String]?,
                                                    interimResultsCallback: InterimResultsCallback?,
-                                                   interuptionCallback: InteruptionCallback?) throws {
+                                                   interruptionCallback: InterruptionCallback?) throws {
         guard state.isIdle else { throw Error.Busy }
 
         let audioFile = try createAudioFile()
@@ -132,7 +130,7 @@ class WatsonSpeechToTextController: SpeechToTextController {
         speechToTextSession.startRequest(recognitionSettings)
         speechToTextSession.startMicrophone(false)
 
-        state = .Transcribing(session: speechToTextSession, audioFile: audioFile, interimResultsCallback: interimResultsCallback, interuptionCallback: interuptionCallback)
+        state = .Transcribing(session: speechToTextSession, audioFile: audioFile, interimResultsCallback: interimResultsCallback, interruptionCallback: interruptionCallback, hasConnected: false)
     }
 
     func stopTranscribingAudioStream(completion: CompletionCallback) throws {
@@ -145,23 +143,40 @@ class WatsonSpeechToTextController: SpeechToTextController {
         speechToTextSession.stopMicrophone()
         speechToTextSession.stopRequest()
         speechToTextSession.disconnect()
-
-        After(0.5) {
-            if !speechToTextSession.results.results.isEmpty {
-                let transcription = SpeechTranscription(watsonSpeechRecognitionResults: speechToTextSession.results)
-                completion(.Success(SpeechToTextResult(transcription: transcription, recordingURL: audioFile.url)))
-            } else {
-                completion(.Failure(NSError(domain: "", code: 0, userInfo: nil)))
-            }
-            self.state = .Idle
-        }
     }
 
     // MARK: Session Callbacks
 
-    //    var onConnect: (Void -> Void)?
+    private func setCallbacks(withSession session: SpeechToTextSession) {
+        session.onConnect = handleOnConnectEvent
+        session.onDisconnect = handleOnDisconnectEvent
+        session.onError = handleOnErrorEvent
+        session.onMicrophoneData = handleOnMicrophoneDataEvent
+        session.onResults = handleOnResultsEvent
+    }
+
+    private func clearCallbacks(withSession session: SpeechToTextSession) {
+        session.onConnect = nil
+        session.onDisconnect = nil
+        session.onError = nil
+        session.onMicrophoneData = nil
+        session.onResults = nil
+    }
+
     private func handleOnConnectEvent() {
         print("connected")
+        switch state {
+        case .Transcribing(let session, let audioFile, let interimResultsCallback, let interruptionCallback, _):
+            state = .Transcribing(
+                session: session,
+                audioFile: audioFile,
+                interimResultsCallback: interimResultsCallback,
+                interruptionCallback: interruptionCallback,
+                hasConnected: true
+            )
+        default:
+            break
+        }
     }
 
     private func handleOnMicrophoneDataEvent(data: NSData) {
@@ -173,16 +188,12 @@ class WatsonSpeechToTextController: SpeechToTextController {
         }
     }
 
-    private func handleOnPowerDataEvent(decibels: Float32) {
-        print(decibels)
-    }
-
     private func handleOnResultsEvent(results: SpeechRecognitionResults) {
         Qu.Main { [weak self] in
             guard let strongSelf = self else { return }
 
             switch strongSelf.state {
-            case .Transcribing(_, _, let interimResultsCallback, _):
+            case .Transcribing(_, _, let interimResultsCallback, _, _):
                 if let interimResultsCallback = interimResultsCallback {
                     let transcription = SpeechTranscription(watsonSpeechRecognitionResults: results)
                     interimResultsCallback(transcription)
@@ -193,17 +204,53 @@ class WatsonSpeechToTextController: SpeechToTextController {
         }
     }
 
-    //    var onError: (NSError -> Void)?
     private func handleOnErrorEvent(error: NSError) {
-        print(error)
+        switch state {
+        case .Transcribing(let session, _, _, let interruptionCallback, let hasConnected):
+            state = .FailingTranscription(session: session, error: error, interruptionCallback: interruptionCallback)
+
+            session.stopMicrophone()
+            session.stopRequest()
+            if hasConnected {
+                session.disconnect()
+            } else {
+                failTranscription()
+            }
+        default:
+            break
+        }
     }
 
-    //    var onDisconnect: (Void -> Void)?
     private func handleOnDisconnectEvent() {
-        print("disconnected")
+        switch state {
+        case .FailingTranscription(_, _, _):
+            failTranscription()
+        case .FinishingTranscription(let session, let audioFile, let completion):
+            clearCallbacks(withSession: session)
+            if !session.results.results.isEmpty {
+                let transcription = SpeechTranscription(watsonSpeechRecognitionResults: session.results)
+                completion(.Success(SpeechToTextResult(transcription: transcription, recordingURL: audioFile.url)))
+            } else {
+                completion(.Failure(NSError(domain: "", code: 0, userInfo: nil)))
+            }
+            state = .Idle
+        default:
+            break
+        }
     }
 
     // MARK: Helpers
+
+    private func failTranscription() {
+        switch state {
+        case .FailingTranscription(let session, let error, let interruptionCallback):
+            clearCallbacks(withSession: session)
+            interruptionCallback?(error)
+            state = .Idle
+        default:
+            break
+        }
+    }
 
     private func generateUniqueFileURL() -> NSURL {
         let temporaryPathURL = NSURL(fileURLWithPath: NSFileManager.temporaryPath)

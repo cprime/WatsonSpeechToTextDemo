@@ -40,6 +40,6 @@ struct SpeechToTextResult: Equatable {
 protocol SpeechToTextController {
     func startTranscribingAudioStream(withKeywords keywords: [String]?,
                                                    interimResultsCallback: (SpeechTranscription -> Void)?,
-                                                   interuptionCallback: (ErrorType -> Void)?) throws
+                                                   interruptionCallback: (ErrorType -> Void)?) throws
     func stopTranscribingAudioStream(completion: (Result<SpeechToTextResult> -> Void)) throws
 }

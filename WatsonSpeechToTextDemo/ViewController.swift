@@ -41,12 +41,13 @@ class ViewController: UIViewController {
             print("onResults:", transcription)
             self.transcriptTextView.text = transcription.transcript
         }
-        let interuptionCallback: ErrorType -> Void = { error in
-            print("interuption Starting: ", error)
+        let interruptionCallback: ErrorType -> Void = { error in
+            print("interruption: ", error)
+            self.setupButtons()
         }
 
         do {
-            try speechToTextController.startTranscribingAudioStream(withKeywords: [], interimResultsCallback: interimResultsCallback, interuptionCallback: interuptionCallback)
+            try speechToTextController.startTranscribingAudioStream(withKeywords: [], interimResultsCallback: interimResultsCallback, interruptionCallback: interruptionCallback)
         } catch let error {
             print("Error Starting: ", error)
         }
