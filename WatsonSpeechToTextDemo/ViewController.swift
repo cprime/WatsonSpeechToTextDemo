@@ -16,7 +16,12 @@ class ViewController: UIViewController {
     let speechToTextController: SpeechToTextController = WatsonSpeechToTextController.shared
 
     var isTranscribing: Bool {
-        return WatsonSpeechToTextController.shared.state.isTranscribing
+        switch WatsonSpeechToTextController.shared.state {
+        case .Idle:
+            return false
+        default:
+            return true
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -65,6 +70,7 @@ class ViewController: UIViewController {
                 } else {
                     print("Failure: ", result.error)
                 }
+                self.setupButtons()
             }
         } catch let error {
             print("Error Stopping: ", error)

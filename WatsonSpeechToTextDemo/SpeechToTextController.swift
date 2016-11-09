@@ -30,6 +30,10 @@ struct SpeechWordTimestamp: Equatable {
 struct SpeechTranscription: Equatable {
     var transcript: String
     var wordTimestamps: [SpeechWordTimestamp]
+
+    static var emptyTranscription: SpeechTranscription {
+        return SpeechTranscription(transcript: "", wordTimestamps: [])
+    }
 }
 
 struct SpeechToTextResult: Equatable {

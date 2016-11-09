@@ -12,7 +12,7 @@
 //      - TODO: Mananage audio session
 //      - TODO: Play tones
 //      - TODO: Convert transcription results into SpeechToTextResult struct
-//      - TODO: Handle session interruptions
+//      - Handle session interruptions
 //      - Handle errors
 
 import Foundation
@@ -33,60 +33,31 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
     enum Error: ErrorType {
         case Busy
+        case SessionInterruption
     }
 
     enum State {
         case Idle
-        case Transcribing(session: SpeechToTextSession, audioFile: AVAudioFile, interimResultsCallback: InterimResultsCallback?, interruptionCallback: InterruptionCallback?, hasConnected: Bool)
+        case Transcribing(session: SpeechToTextSession, audioFile: AVAudioFile, interimResultsCallback: InterimResultsCallback?, interruptionCallback: InterruptionCallback?)
         case FailingTranscription(session: SpeechToTextSession, error: ErrorType, interruptionCallback: InterruptionCallback?)
         case FinishingTranscription(session: SpeechToTextSession, audioFile: AVAudioFile, completion: CompletionCallback)
-
-        var isIdle: Bool {
-            switch self {
-            case .Idle:
-                return true
-            default:
-                return false
-            }
-        }
-
-        var isTranscribing: Bool {
-            switch self {
-            case .Transcribing:
-                return true
-            default:
-                return false
-            }
-        }
-
-        var session: SpeechToTextSession? {
-            switch self {
-            case .Transcribing(let session, _, _, _, _):
-                return session
-            default:
-                return nil
-            }
-        }
-
-        var audioFile: AVAudioFile? {
-            switch self {
-            case .Transcribing(_, let audioFile, _, _, _):
-                return audioFile
-            default:
-                return nil
-            }
-        }
     }
-    var state = State.Idle {
-        didSet(oldValue) {
-            print(oldValue, " -> ", state)
-        }
-    }
+    var state = State.Idle
 
     private static let audioSettings: [String : AnyObject] = [
         AVSampleRateKey: 16000,
         AVNumberOfChannelsKey: 1,
     ]
+
+    // MARK: Lifecycle
+
+    init() {
+        registerForNotifications()
+    }
+
+    deinit {
+        unregisterForNotifications()
+    }
 
     // MARK: Constructors
 
@@ -118,37 +89,66 @@ class WatsonSpeechToTextController: SpeechToTextController {
     func startTranscribingAudioStream(withKeywords keywords: [String]?,
                                                    interimResultsCallback: InterimResultsCallback?,
                                                    interruptionCallback: InterruptionCallback?) throws {
-        guard state.isIdle else { throw Error.Busy }
+        switch state {
+        case .Idle:
+            let audioFile = try createAudioFile()
+            let recognitionSettings = createRecognitionSettings(withKeywords: keywords)
+            let speechToTextSession = createSpeechToTextSession(audioFile)
 
-        let audioFile = try createAudioFile()
-        print(audioFile.url)
+            state = .Transcribing(session: speechToTextSession, audioFile: audioFile, interimResultsCallback: interimResultsCallback, interruptionCallback: interruptionCallback)
 
-        let recognitionSettings = createRecognitionSettings(withKeywords: keywords)
-        let speechToTextSession = createSpeechToTextSession(audioFile)
-
-        speechToTextSession.connect()
-        speechToTextSession.startRequest(recognitionSettings)
-        speechToTextSession.startMicrophone(false)
-
-        state = .Transcribing(session: speechToTextSession, audioFile: audioFile, interimResultsCallback: interimResultsCallback, interruptionCallback: interruptionCallback, hasConnected: false)
+            speechToTextSession.connect()
+            speechToTextSession.startRequest(recognitionSettings)
+            speechToTextSession.startMicrophone(false)
+        default:
+            throw Error.Busy
+        }
     }
 
     func stopTranscribingAudioStream(completion: CompletionCallback) throws {
-        guard state.isTranscribing else { throw Error.Busy }
-        guard let speechToTextSession = state.session else { throw Error.Busy }
-        guard let audioFile = state.audioFile else { throw Error.Busy }
+        switch state {
+        case .Transcribing(let speechToTextSession, let audioFile, _, _):
+            state = .FinishingTranscription(session: speechToTextSession, audioFile: audioFile, completion: completion)
 
-        state = .FinishingTranscription(session: speechToTextSession, audioFile: audioFile, completion: completion)
+            speechToTextSession.stopMicrophone()
+            speechToTextSession.stopRequest()
+            speechToTextSession.disconnect()
+        default:
+            throw Error.Busy
+        }
+    }
 
-        speechToTextSession.stopMicrophone()
-        speechToTextSession.stopRequest()
-        speechToTextSession.disconnect()
+    // MARK: - Notifications
+
+    private func registerForNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(WatsonSpeechToTextController.handleAudioSessionInterruptionNotification),
+                                                         name: AVAudioSessionInterruptionNotification,
+                                                         object: AVAudioSession.sharedInstance())
+    }
+
+    private func unregisterForNotifications() {
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+                                                            name: AVAudioSessionInterruptionNotification,
+                                                            object: AVAudioSession.sharedInstance())
+    }
+
+    @objc private func handleAudioSessionInterruptionNotification(notification: NSNotification) {
+        guard notification.name == AVAudioSessionInterruptionNotification else { return }
+        guard let value = notification.userInfo?[AVAudioSessionInterruptionTypeKey] as? UInt,
+            let interruptionType = AVAudioSessionInterruptionType(rawValue: value) where interruptionType == .Began else { return }
+
+        switch state {
+        case .Transcribing(_, _, _, _):
+            failTranscription(withError: Error.SessionInterruption)
+        default:
+            break
+        }
     }
 
     // MARK: Session Callbacks
 
     private func setCallbacks(withSession session: SpeechToTextSession) {
-        session.onConnect = handleOnConnectEvent
         session.onDisconnect = handleOnDisconnectEvent
         session.onError = handleOnErrorEvent
         session.onMicrophoneData = handleOnMicrophoneDataEvent
@@ -156,35 +156,26 @@ class WatsonSpeechToTextController: SpeechToTextController {
     }
 
     private func clearCallbacks(withSession session: SpeechToTextSession) {
-        session.onConnect = nil
         session.onDisconnect = nil
         session.onError = nil
         session.onMicrophoneData = nil
         session.onResults = nil
     }
 
-    private func handleOnConnectEvent() {
-        print("connected")
-        switch state {
-        case .Transcribing(let session, let audioFile, let interimResultsCallback, let interruptionCallback, _):
-            state = .Transcribing(
-                session: session,
-                audioFile: audioFile,
-                interimResultsCallback: interimResultsCallback,
-                interruptionCallback: interruptionCallback,
-                hasConnected: true
-            )
-        default:
-            break
-        }
-    }
-
     private func handleOnMicrophoneDataEvent(data: NSData) {
         Qu.Main { [weak self] in
             guard let strongSelf = self else { return }
-            guard let audioFile = strongSelf.state.audioFile else { return }
-            let success = strongSelf.write(data, audioFile: audioFile)
-            print("writeSucces:", success, data.length)
+
+            switch strongSelf.state {
+            case .Transcribing(_, let audioFile, _, _):
+                do {
+                    try strongSelf.write(data, audioFile: audioFile)
+                } catch let error {
+                    strongSelf.failTranscription(withError: error)
+                }
+            default:
+                break
+            }
         }
     }
 
@@ -193,7 +184,7 @@ class WatsonSpeechToTextController: SpeechToTextController {
             guard let strongSelf = self else { return }
 
             switch strongSelf.state {
-            case .Transcribing(_, _, let interimResultsCallback, _, _):
+            case .Transcribing(_, _, let interimResultsCallback, _):
                 if let interimResultsCallback = interimResultsCallback {
                     let transcription = SpeechTranscription(watsonSpeechRecognitionResults: results)
                     interimResultsCallback(transcription)
@@ -206,16 +197,8 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
     private func handleOnErrorEvent(error: NSError) {
         switch state {
-        case .Transcribing(let session, _, _, let interruptionCallback, let hasConnected):
-            state = .FailingTranscription(session: session, error: error, interruptionCallback: interruptionCallback)
-
-            session.stopMicrophone()
-            session.stopRequest()
-            if hasConnected {
-                session.disconnect()
-            } else {
-                failTranscription()
-            }
+        case .Transcribing(_, _, _, _):
+            failTranscription(withError: error)
         default:
             break
         }
@@ -224,16 +207,13 @@ class WatsonSpeechToTextController: SpeechToTextController {
     private func handleOnDisconnectEvent() {
         switch state {
         case .FailingTranscription(_, _, _):
-            failTranscription()
+            finishFailingTranscription()
         case .FinishingTranscription(let session, let audioFile, let completion):
             clearCallbacks(withSession: session)
-            if !session.results.results.isEmpty {
-                let transcription = SpeechTranscription(watsonSpeechRecognitionResults: session.results)
-                completion(.Success(SpeechToTextResult(transcription: transcription, recordingURL: audioFile.url)))
-            } else {
-                completion(.Failure(NSError(domain: "", code: 0, userInfo: nil)))
-            }
             state = .Idle
+            let transcription = session.results.results.isEmpty ? SpeechTranscription.emptyTranscription : SpeechTranscription(watsonSpeechRecognitionResults: session.results)
+            let speechToTextResult = SpeechToTextResult(transcription: transcription, recordingURL: audioFile.url)
+            completion(.Success(speechToTextResult))
         default:
             break
         }
@@ -241,14 +221,29 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
     // MARK: Helpers
 
-    private func failTranscription() {
+    private func failTranscription(withError error: ErrorType) {
+        switch state {
+        case .Transcribing(let session, _, _, let interruptionCallback):
+            state = .FailingTranscription(session: session, error: error, interruptionCallback: interruptionCallback)
+
+            session.stopMicrophone()
+            session.stopRequest()
+            session.disconnect()
+
+            finishFailingTranscription()
+        default:
+            fatalError("Should only fail a transcription that is active")
+        }
+    }
+
+    private func finishFailingTranscription() {
         switch state {
         case .FailingTranscription(let session, let error, let interruptionCallback):
             clearCallbacks(withSession: session)
-            interruptionCallback?(error)
             state = .Idle
+            interruptionCallback?(error)
         default:
-            break
+            fatalError("Should only finish a transcription as failing if it is already failing")
         }
     }
 
@@ -257,20 +252,14 @@ class WatsonSpeechToTextController: SpeechToTextController {
         return temporaryPathURL.URLByAppendingPathComponent("Voice_Recording_\(NSUUID().UUIDString).caf")!
     }
 
-    private func write(data: NSData, audioFile: AVAudioFile) -> Bool {
+    private func write(data: NSData, audioFile: AVAudioFile) throws {
         let audioFormat = audioFile.fileFormat
         let PCMBuffer = AVAudioPCMBuffer(PCMFormat: audioFormat, frameCapacity: UInt32(data.length) / audioFormat.streamDescription.memory.mBytesPerFrame)
         PCMBuffer.frameLength = PCMBuffer.frameCapacity
         let channels = UnsafeBufferPointer(start: PCMBuffer.int16ChannelData, count: Int(PCMBuffer.format.channelCount))
         data.getBytes(UnsafeMutablePointer<Void>(channels[0]) , length: data.length)
 
-        do {
-            try audioFile.writeFromBuffer(PCMBuffer)
-            return true
-        } catch let error {
-            print("error: ", error)
-            return false
-        }
+        try audioFile.writeFromBuffer(PCMBuffer)
     }
 }
 
