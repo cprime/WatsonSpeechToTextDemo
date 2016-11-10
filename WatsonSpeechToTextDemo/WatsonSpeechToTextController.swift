@@ -11,7 +11,7 @@
 //      - Start/stop transcription service
 //      - TODO: Mananage audio session
 //      - TODO: Play tones
-//      - TODO: Convert transcription results into SpeechToTextResult struct
+//      - Convert transcription results into SpeechToTextResult struct
 //      - Handle session interruptions
 //      - Handle errors
 
@@ -38,9 +38,9 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
     enum State {
         case Idle
-        case Transcribing(session: SpeechToTextSession, audioFile: AVAudioFile, interimResultsCallback: InterimResultsCallback?, interruptionCallback: InterruptionCallback?)
+        case Transcribing(session: SpeechToTextSession, keywords: [String], audioFile: AVAudioFile, interimResultsCallback: InterimResultsCallback?, interruptionCallback: InterruptionCallback?)
+        case FinishingTranscription(session: SpeechToTextSession, keywords: [String], audioFile: AVAudioFile, completion: CompletionCallback)
         case FailingTranscription(session: SpeechToTextSession, error: ErrorType, interruptionCallback: InterruptionCallback?)
-        case FinishingTranscription(session: SpeechToTextSession, audioFile: AVAudioFile, completion: CompletionCallback)
     }
     var state = State.Idle
 
@@ -81,12 +81,15 @@ class WatsonSpeechToTextController: SpeechToTextController {
         settings.interimResults = true
         settings.continuous = true
         settings.keywords = keywords
+        settings.keywordsThreshold = 0.1
+        settings.timestamps = true
+        settings.wordAlternativesThreshold = 0.1
         return settings
     }
 
     // MARK: SpeechToTextController
 
-    func startTranscribingAudioStream(withKeywords keywords: [String]?,
+    func startTranscribingAudioStream(withKeywords keywords: [String],
                                                    interimResultsCallback: InterimResultsCallback?,
                                                    interruptionCallback: InterruptionCallback?) throws {
         switch state {
@@ -95,7 +98,7 @@ class WatsonSpeechToTextController: SpeechToTextController {
             let recognitionSettings = createRecognitionSettings(withKeywords: keywords)
             let speechToTextSession = createSpeechToTextSession(audioFile)
 
-            state = .Transcribing(session: speechToTextSession, audioFile: audioFile, interimResultsCallback: interimResultsCallback, interruptionCallback: interruptionCallback)
+            state = .Transcribing(session: speechToTextSession, keywords: keywords, audioFile: audioFile, interimResultsCallback: interimResultsCallback, interruptionCallback: interruptionCallback)
 
             speechToTextSession.connect()
             speechToTextSession.startRequest(recognitionSettings)
@@ -107,8 +110,8 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
     func stopTranscribingAudioStream(completion: CompletionCallback) throws {
         switch state {
-        case .Transcribing(let speechToTextSession, let audioFile, _, _):
-            state = .FinishingTranscription(session: speechToTextSession, audioFile: audioFile, completion: completion)
+        case .Transcribing(let speechToTextSession, let keywords, let audioFile, _, _):
+            state = .FinishingTranscription(session: speechToTextSession, keywords: keywords, audioFile: audioFile, completion: completion)
 
             speechToTextSession.stopMicrophone()
             speechToTextSession.stopRequest()
@@ -139,7 +142,7 @@ class WatsonSpeechToTextController: SpeechToTextController {
             let interruptionType = AVAudioSessionInterruptionType(rawValue: value) where interruptionType == .Began else { return }
 
         switch state {
-        case .Transcribing(_, _, _, _):
+        case .Transcribing(_, _, _, _, _):
             failTranscription(withError: Error.SessionInterruption)
         default:
             break
@@ -167,7 +170,7 @@ class WatsonSpeechToTextController: SpeechToTextController {
             guard let strongSelf = self else { return }
 
             switch strongSelf.state {
-            case .Transcribing(_, let audioFile, _, _):
+            case .Transcribing(_, _, let audioFile, _, _):
                 do {
                     try strongSelf.write(data, audioFile: audioFile)
                 } catch let error {
@@ -184,9 +187,9 @@ class WatsonSpeechToTextController: SpeechToTextController {
             guard let strongSelf = self else { return }
 
             switch strongSelf.state {
-            case .Transcribing(_, _, let interimResultsCallback, _):
+            case .Transcribing(_, let keywords, _, let interimResultsCallback, _):
                 if let interimResultsCallback = interimResultsCallback {
-                    let transcription = SpeechTranscription(watsonSpeechRecognitionResults: results)
+                    let transcription = SpeechTranscription(watsonSpeechRecognitionResults: results, keywords: keywords)
                     interimResultsCallback(transcription)
                 }
             default:
@@ -197,7 +200,7 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
     private func handleOnErrorEvent(error: NSError) {
         switch state {
-        case .Transcribing(_, _, _, _):
+        case .Transcribing(_, _, _, _, _):
             failTranscription(withError: error)
         default:
             break
@@ -208,10 +211,13 @@ class WatsonSpeechToTextController: SpeechToTextController {
         switch state {
         case .FailingTranscription(_, _, _):
             finishFailingTranscription()
-        case .FinishingTranscription(let session, let audioFile, let completion):
+        case .FinishingTranscription(let session, let keywords, let audioFile, let completion):
             clearCallbacks(withSession: session)
             state = .Idle
-            let transcription = session.results.results.isEmpty ? SpeechTranscription.emptyTranscription : SpeechTranscription(watsonSpeechRecognitionResults: session.results)
+            let watsonResults = session.results
+            let transcription = watsonResults.results.isEmpty
+                ? SpeechTranscription.emptyTranscription
+                : SpeechTranscription(watsonSpeechRecognitionResults: watsonResults, keywords: keywords)
             let speechToTextResult = SpeechToTextResult(transcription: transcription, recordingURL: audioFile.url)
             completion(.Success(speechToTextResult))
         default:
@@ -223,7 +229,7 @@ class WatsonSpeechToTextController: SpeechToTextController {
 
     private func failTranscription(withError error: ErrorType) {
         switch state {
-        case .Transcribing(let session, _, _, let interruptionCallback):
+        case .Transcribing(let session, _, _, _, let interruptionCallback):
             state = .FailingTranscription(session: session, error: error, interruptionCallback: interruptionCallback)
 
             session.stopMicrophone()
@@ -263,9 +269,38 @@ class WatsonSpeechToTextController: SpeechToTextController {
     }
 }
 
-private extension SpeechTranscription {
-    init(watsonSpeechRecognitionResults results: SpeechRecognitionResults) {
-        transcript = results.bestTranscript
-        wordTimestamps = [] // TODO
+extension SpeechTranscription {
+    init(watsonSpeechRecognitionResults results: SpeechRecognitionResults, keywords: [String]) {
+        var combinedTimestamps = [SpeechWordTimestamp]()
+
+        for result in results.results {
+            if let alternative = result.alternatives.first where alternative.timestamps?.count > 0 {
+                var wordTimestamps = [SpeechWordTimestamp]()
+
+                let sortedTimestamps = alternative.timestamps?.sort({ $0.startTime < $1.startTime }) ?? []
+                wordTimestamps = sortedTimestamps.map({
+                    SpeechWordTimestamp(
+                        word: $0.word,
+                        startOffset: NSTimeInterval($0.startTime),
+                        endOffset: NSTimeInterval($0.endTime)
+                    )
+                })
+
+                // Replace words with appropriate alternative key words
+                let wordAlternatives = result.wordAlternatives ?? []
+                wordTimestamps = wordTimestamps.map({ timestamp in
+                    guard let potentialReplacements = wordAlternatives.filter({ $0.startTime == timestamp.startOffset && $0.endTime == timestamp.endOffset }).first,
+                        let bestReplacement = potentialReplacements.alternatives.filter({ keywords.contains($0.word) }).sort({ $0.confidence > $1.confidence }).first else {
+                            return timestamp
+                    }
+                    return SpeechWordTimestamp(word: bestReplacement.word, startOffset: timestamp.startOffset, endOffset: timestamp.endOffset)
+                })
+
+                combinedTimestamps.appendContentsOf(wordTimestamps)
+            }
+        }
+
+        self.transcript = combinedTimestamps.map({ $0.word }).joinWithSeparator(" ")
+        self.wordTimestamps = combinedTimestamps
     }
 }

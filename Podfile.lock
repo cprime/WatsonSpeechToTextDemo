@@ -6,12 +6,16 @@ PODS:
   - Intrepid/Core (0.5.2):
     - IP-UIKit-Wisdom (= 0.0.9)
   - IP-UIKit-Wisdom (0.0.9)
+  - Nimble (4.1.0)
+  - Quick (0.9.3)
   - Starscream (1.1.4)
 
 DEPENDENCIES:
   - Alamofire (~> 3.5.1)
   - Freddy (~> 2.1.0)
   - Intrepid (~> 0.5.2)
+  - Nimble (~> 4.0)
+  - Quick (~> 0.9.1)
   - Starscream (~> 1.1.4)
 
 SPEC CHECKSUMS:
@@ -19,8 +23,10 @@ SPEC CHECKSUMS:
   Freddy: bbdca013977db29638b24baf6572ce94452bec29
   Intrepid: a72e2da8e411ddb04d74e348b3ffbfb6e6197a37
   IP-UIKit-Wisdom: cd9838571e97427a0c61c05d856eaaca9afd7c1a
+  Nimble: 97a0a4cae5124c117115634b2d055d8c97d0af19
+  Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
   Starscream: f919aeaf81afca6d5d4d3e5f6dd136ec92af2aa1
 
-PODFILE CHECKSUM: 313fe26eecb16fcbce998a5e1cad3d4efba99ce6
+PODFILE CHECKSUM: ee368b61e2206cddf6d07226286462faf8504ebe
 
 COCOAPODS: 1.2.0.beta.1

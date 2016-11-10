@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23F6CBAAFB638FB6811644C3 /* Pods_WatsonSpeechToTextDemo_WatsonSpeechToTextDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253D4728E86CD2227E2D7E36 /* Pods_WatsonSpeechToTextDemo_WatsonSpeechToTextDemoTests.framework */; };
 		5AF40021CE1B2C3DC2F10FA6 /* Pods_WatsonSpeechToTextDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E1B452D1FCC08EFA68FEC9C /* Pods_WatsonSpeechToTextDemo.framework */; };
 		E69EB0831DC93028009B2B02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0821DC93028009B2B02 /* AppDelegate.swift */; };
 		E69EB0851DC93028009B2B02 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69EB0841DC93028009B2B02 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 		E69F199A1DCCC57700F58F31 /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = E69F19991DCCC57700F58F31 /* keys.plist */; };
 		E69F199C1DCCC88600F58F31 /* ServiceKeyLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F199B1DCCC88600F58F31 /* ServiceKeyLoader.swift */; };
 		E69F199E1DCCDC9300F58F31 /* SpeechToTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E69F199D1DCCDC9300F58F31 /* SpeechToTextController.swift */; };
+		E6ADBF2B1DD3DCD2005276AD /* SpeechTranscriptionExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6ADBF2A1DD3DCD2005276AD /* SpeechTranscriptionExtensionSpec.swift */; };
 		E6D8765F1DCA345A00B5D729 /* RestRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876371DCA345A00B5D729 /* RestRequest.swift */; };
 		E6D876601DCA345A00B5D729 /* RestSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876381DCA345A00B5D729 /* RestSerialization.swift */; };
 		E6D876611DCA345A00B5D729 /* RestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876391DCA345A00B5D729 /* RestToken.swift */; };
@@ -47,10 +49,23 @@
 		E6D8767A1DCA3F3100B5D729 /* WatsonSpeechToTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D876791DCA3F3100B5D729 /* WatsonSpeechToTextController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E6ADBF251DD3DA97005276AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E69EB0771DC93028009B2B02 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E69EB07E1DC93028009B2B02;
+			remoteInfo = WatsonSpeechToTextDemo;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0AD4D3DB610895D18739C794 /* Pods-WatsonSpeechToTextDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsonSpeechToTextDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatsonSpeechToTextDemo/Pods-WatsonSpeechToTextDemo.release.xcconfig"; sourceTree = "<group>"; };
 		1E1B452D1FCC08EFA68FEC9C /* Pods_WatsonSpeechToTextDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatsonSpeechToTextDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		253D4728E86CD2227E2D7E36 /* Pods_WatsonSpeechToTextDemo_WatsonSpeechToTextDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatsonSpeechToTextDemo_WatsonSpeechToTextDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7933E6DBF734E4478D55D147 /* Pods-WatsonSpeechToTextDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsonSpeechToTextDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatsonSpeechToTextDemo/Pods-WatsonSpeechToTextDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		835AFDE693A3D68467845CD2 /* Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests/Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		CC463C5AAABE2CF37CCACA16 /* Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests/Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E69EB07F1DC93028009B2B02 /* WatsonSpeechToTextDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatsonSpeechToTextDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E69EB0821DC93028009B2B02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E69EB0841DC93028009B2B02 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +79,9 @@
 		E69F19991DCCC57700F58F31 /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = keys.plist; path = ../keys.plist; sourceTree = "<group>"; };
 		E69F199B1DCCC88600F58F31 /* ServiceKeyLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceKeyLoader.swift; sourceTree = "<group>"; };
 		E69F199D1DCCDC9300F58F31 /* SpeechToTextController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextController.swift; sourceTree = "<group>"; };
+		E6ADBF201DD3DA97005276AD /* WatsonSpeechToTextDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatsonSpeechToTextDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6ADBF241DD3DA97005276AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E6ADBF2A1DD3DCD2005276AD /* SpeechTranscriptionExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechTranscriptionExtensionSpec.swift; sourceTree = "<group>"; };
 		E6D876371DCA345A00B5D729 /* RestRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestRequest.swift; sourceTree = "<group>"; };
 		E6D876381DCA345A00B5D729 /* RestSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestSerialization.swift; sourceTree = "<group>"; };
 		E6D876391DCA345A00B5D729 /* RestToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestToken.swift; sourceTree = "<group>"; };
@@ -113,6 +131,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6ADBF1D1DD3DA97005276AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23F6CBAAFB638FB6811644C3 /* Pods_WatsonSpeechToTextDemo_WatsonSpeechToTextDemoTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -120,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				1E1B452D1FCC08EFA68FEC9C /* Pods_WatsonSpeechToTextDemo.framework */,
+				253D4728E86CD2227E2D7E36 /* Pods_WatsonSpeechToTextDemo_WatsonSpeechToTextDemoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -129,6 +156,8 @@
 			children = (
 				7933E6DBF734E4478D55D147 /* Pods-WatsonSpeechToTextDemo.debug.xcconfig */,
 				0AD4D3DB610895D18739C794 /* Pods-WatsonSpeechToTextDemo.release.xcconfig */,
+				CC463C5AAABE2CF37CCACA16 /* Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests.debug.xcconfig */,
+				835AFDE693A3D68467845CD2 /* Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -138,6 +167,7 @@
 			children = (
 				E6D876331DCA345A00B5D729 /* Contrib */,
 				E69EB0811DC93028009B2B02 /* WatsonSpeechToTextDemo */,
+				E6ADBF211DD3DA97005276AD /* WatsonSpeechToTextDemoTests */,
 				E69EB0801DC93028009B2B02 /* Products */,
 				528328076BA3A1D7DA4CBA98 /* Pods */,
 				10A950EF20A2724A9EDACAA4 /* Frameworks */,
@@ -148,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				E69EB07F1DC93028009B2B02 /* WatsonSpeechToTextDemo.app */,
+				E6ADBF201DD3DA97005276AD /* WatsonSpeechToTextDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +202,15 @@
 				E69F199B1DCCC88600F58F31 /* ServiceKeyLoader.swift */,
 			);
 			path = WatsonSpeechToTextDemo;
+			sourceTree = "<group>";
+		};
+		E6ADBF211DD3DA97005276AD /* WatsonSpeechToTextDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				E6ADBF241DD3DA97005276AD /* Info.plist */,
+				E6ADBF2A1DD3DCD2005276AD /* SpeechTranscriptionExtensionSpec.swift */,
+			);
+			path = WatsonSpeechToTextDemoTests;
 			sourceTree = "<group>";
 		};
 		E6D876331DCA345A00B5D729 /* Contrib */ = {
@@ -309,6 +349,27 @@
 			productReference = E69EB07F1DC93028009B2B02 /* WatsonSpeechToTextDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E6ADBF1F1DD3DA97005276AD /* WatsonSpeechToTextDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E6ADBF291DD3DA97005276AD /* Build configuration list for PBXNativeTarget "WatsonSpeechToTextDemoTests" */;
+			buildPhases = (
+				BE43F5707B36D7A42CBAF037 /* [CP] Check Pods Manifest.lock */,
+				E6ADBF1C1DD3DA97005276AD /* Sources */,
+				E6ADBF1D1DD3DA97005276AD /* Frameworks */,
+				E6ADBF1E1DD3DA97005276AD /* Resources */,
+				44966279E2ACD984E9BD3C46 /* [CP] Embed Pods Frameworks */,
+				CA79280C9ADAA4D07F122881 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E6ADBF261DD3DA97005276AD /* PBXTargetDependency */,
+			);
+			name = WatsonSpeechToTextDemoTests;
+			productName = WatsonSpeechToTextDemoTests;
+			productReference = E6ADBF201DD3DA97005276AD /* WatsonSpeechToTextDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -329,6 +390,11 @@
 							};
 						};
 					};
+					E6ADBF1F1DD3DA97005276AD = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E69EB07E1DC93028009B2B02;
+					};
 				};
 			};
 			buildConfigurationList = E69EB07A1DC93028009B2B02 /* Build configuration list for PBXProject "WatsonSpeechToTextDemo" */;
@@ -345,6 +411,7 @@
 			projectRoot = "";
 			targets = (
 				E69EB07E1DC93028009B2B02 /* WatsonSpeechToTextDemo */,
+				E6ADBF1F1DD3DA97005276AD /* WatsonSpeechToTextDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -358,6 +425,13 @@
 				E69EB08D1DC93028009B2B02 /* LaunchScreen.storyboard in Resources */,
 				E69EB08A1DC93028009B2B02 /* Assets.xcassets in Resources */,
 				E69EB0881DC93028009B2B02 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6ADBF1E1DD3DA97005276AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +466,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		44966279E2ACD984E9BD3C46 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests/Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE43F5707B36D7A42CBAF037 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CA79280C9ADAA4D07F122881 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests/Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E651158947C78745E4523301 /* [CP] Embed Pods Frameworks */ = {
@@ -450,7 +569,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E6ADBF1C1DD3DA97005276AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6ADBF2B1DD3DCD2005276AD /* SpeechTranscriptionExtensionSpec.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E6ADBF261DD3DA97005276AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E69EB07E1DC93028009B2B02 /* WatsonSpeechToTextDemo */;
+			targetProxy = E6ADBF251DD3DA97005276AD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E69EB0861DC93028009B2B02 /* Main.storyboard */ = {
@@ -609,6 +744,34 @@
 			};
 			name = Release;
 		};
+		E6ADBF271DD3DA97005276AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC463C5AAABE2CF37CCACA16 /* Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = WatsonSpeechToTextDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.intrepid.WatsonSpeechToTextDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatsonSpeechToTextDemo.app/WatsonSpeechToTextDemo";
+			};
+			name = Debug;
+		};
+		E6ADBF281DD3DA97005276AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 835AFDE693A3D68467845CD2 /* Pods-WatsonSpeechToTextDemo-WatsonSpeechToTextDemoTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = WatsonSpeechToTextDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.intrepid.WatsonSpeechToTextDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatsonSpeechToTextDemo.app/WatsonSpeechToTextDemo";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -626,6 +789,15 @@
 			buildConfigurations = (
 				E69EB0921DC93028009B2B02 /* Debug */,
 				E69EB0931DC93028009B2B02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E6ADBF291DD3DA97005276AD /* Build configuration list for PBXNativeTarget "WatsonSpeechToTextDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6ADBF271DD3DA97005276AD /* Debug */,
+				E6ADBF281DD3DA97005276AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

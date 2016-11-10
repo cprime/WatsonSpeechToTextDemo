@@ -24,6 +24,13 @@ class ViewController: UIViewController {
         }
     }
 
+    var keywords = [
+        "Colden",
+        "Kerry",
+        "Alan",
+        "Tommy"
+    ]
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if !AudioManager.sharedInstance.hasRequestedRecordPermission() {
@@ -52,7 +59,11 @@ class ViewController: UIViewController {
         }
 
         do {
-            try speechToTextController.startTranscribingAudioStream(withKeywords: [], interimResultsCallback: interimResultsCallback, interruptionCallback: interruptionCallback)
+            try speechToTextController.startTranscribingAudioStream(
+                withKeywords: keywords,
+                interimResultsCallback: interimResultsCallback,
+                interruptionCallback: interruptionCallback
+            )
         } catch let error {
             print("Error Starting: ", error)
         }
